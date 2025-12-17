@@ -5,7 +5,7 @@
 import * as errors from "../../errors/index.js";
 import * as core from "../../core/index.js";
 
-export class MethodNotAllowedError extends errors.RobertNoyesDemoApiError {
+export class MethodNotAllowedError extends errors.RobertNoyesError {
     constructor(body?: unknown, rawResponse?: core.RawResponse) {
         super({
             message: "MethodNotAllowedError",

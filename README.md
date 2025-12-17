@@ -37,9 +37,9 @@ A full reference for this library is available [here](https://github.com/rob-noy
 Instantiate and use the client with the following:
 
 ```typescript
-import { RobertNoyesDemoApiClient } from "robert-noyes-typescript-sdk";
+import { RobertNoyesClient } from "robert-noyes-typescript-sdk";
 
-const client = new RobertNoyesDemoApiClient();
+const client = new RobertNoyesClient();
 await client.plant.addPlant({
     name: "Fern",
     category: "Indoor",
@@ -54,9 +54,9 @@ The SDK exports all request and response types as TypeScript interfaces. Simply 
 following namespace:
 
 ```typescript
-import { RobertNoyesDemoApi } from "robert-noyes-typescript-sdk";
+import { RobertNoyes } from "robert-noyes-typescript-sdk";
 
-const request: RobertNoyesDemoApi.SearchPlantsByStatusRequest = {
+const request: RobertNoyes.SearchPlantsByStatusRequest = {
     ...
 };
 ```
@@ -67,12 +67,12 @@ When the API returns a non-success status code (4xx or 5xx response), a subclass
 will be thrown.
 
 ```typescript
-import { RobertNoyesDemoApiError } from "robert-noyes-typescript-sdk";
+import { RobertNoyesError } from "robert-noyes-typescript-sdk";
 
 try {
     await client.plant.addPlant(...);
 } catch (err) {
-    if (err instanceof RobertNoyesDemoApiError) {
+    if (err instanceof RobertNoyesError) {
         console.log(err.statusCode);
         console.log(err.message);
         console.log(err.body);
@@ -178,9 +178,9 @@ The SDK provides a way for you to customize the underlying HTTP client / Fetch f
 unsupported environment, this provides a way for you to break glass and ensure the SDK works.
 
 ```typescript
-import { RobertNoyesDemoApiClient } from "robert-noyes-typescript-sdk";
+import { RobertNoyesClient } from "robert-noyes-typescript-sdk";
 
-const client = new RobertNoyesDemoApiClient({
+const client = new RobertNoyesClient({
     ...
     fetcher: // provide your implementation here
 });

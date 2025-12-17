@@ -4,13 +4,13 @@
 
 import * as environments from "../../../../environments.js";
 import * as core from "../../../../core/index.js";
-import * as RobertNoyesDemoApi from "../../../index.js";
+import * as RobertNoyes from "../../../index.js";
 import { mergeHeaders } from "../../../../core/headers.js";
 import * as errors from "../../../../errors/index.js";
 
 export declare namespace Plant {
     export interface Options {
-        environment?: core.Supplier<environments.RobertNoyesDemoApiEnvironment | string>;
+        environment?: core.Supplier<environments.RobertNoyesEnvironment | string>;
         /** Specify a custom URL to connect the client to. */
         baseUrl?: core.Supplier<string>;
         /** Additional headers to include in requests. */
@@ -42,10 +42,10 @@ export class Plant {
     }
 
     /**
-     * @param {RobertNoyesDemoApi.Plant} request
+     * @param {RobertNoyes.Plant} request
      * @param {Plant.RequestOptions} requestOptions - Request-specific configuration.
      *
-     * @throws {@link RobertNoyesDemoApi.MethodNotAllowedError}
+     * @throws {@link RobertNoyes.MethodNotAllowedError}
      *
      * @example
      *     await client.plant.addPlant({
@@ -56,22 +56,22 @@ export class Plant {
      *     })
      */
     public addPlant(
-        request: RobertNoyesDemoApi.Plant,
+        request: RobertNoyes.Plant,
         requestOptions?: Plant.RequestOptions,
-    ): core.HttpResponsePromise<RobertNoyesDemoApi.PlantResponse> {
+    ): core.HttpResponsePromise<RobertNoyes.PlantResponse> {
         return core.HttpResponsePromise.fromPromise(this.__addPlant(request, requestOptions));
     }
 
     private async __addPlant(
-        request: RobertNoyesDemoApi.Plant,
+        request: RobertNoyes.Plant,
         requestOptions?: Plant.RequestOptions,
-    ): Promise<core.WithRawResponse<RobertNoyesDemoApi.PlantResponse>> {
+    ): Promise<core.WithRawResponse<RobertNoyes.PlantResponse>> {
         let _headers: core.Fetcher.Args["headers"] = mergeHeaders(this._options?.headers, requestOptions?.headers);
         const _response = await core.fetcher({
             url: core.url.join(
                 (await core.Supplier.get(this._options.baseUrl)) ??
                     (await core.Supplier.get(this._options.environment)) ??
-                    environments.RobertNoyesDemoApiEnvironment.Default,
+                    environments.RobertNoyesEnvironment.Default,
                 "plant",
             ),
             method: "POST",
@@ -85,18 +85,15 @@ export class Plant {
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return { data: _response.body as RobertNoyesDemoApi.PlantResponse, rawResponse: _response.rawResponse };
+            return { data: _response.body as RobertNoyes.PlantResponse, rawResponse: _response.rawResponse };
         }
 
         if (_response.error.reason === "status-code") {
             switch (_response.error.statusCode) {
                 case 405:
-                    throw new RobertNoyesDemoApi.MethodNotAllowedError(
-                        _response.error.body as unknown,
-                        _response.rawResponse,
-                    );
+                    throw new RobertNoyes.MethodNotAllowedError(_response.error.body as unknown, _response.rawResponse);
                 default:
-                    throw new errors.RobertNoyesDemoApiError({
+                    throw new errors.RobertNoyesError({
                         statusCode: _response.error.statusCode,
                         body: _response.error.body,
                         rawResponse: _response.rawResponse,
@@ -106,15 +103,15 @@ export class Plant {
 
         switch (_response.error.reason) {
             case "non-json":
-                throw new errors.RobertNoyesDemoApiError({
+                throw new errors.RobertNoyesError({
                     statusCode: _response.error.statusCode,
                     body: _response.error.rawBody,
                     rawResponse: _response.rawResponse,
                 });
             case "timeout":
-                throw new errors.RobertNoyesDemoApiTimeoutError("Timeout exceeded when calling POST /plant.");
+                throw new errors.RobertNoyesTimeoutError("Timeout exceeded when calling POST /plant.");
             case "unknown":
-                throw new errors.RobertNoyesDemoApiError({
+                throw new errors.RobertNoyesError({
                     message: _response.error.errorMessage,
                     rawResponse: _response.rawResponse,
                 });
@@ -122,11 +119,11 @@ export class Plant {
     }
 
     /**
-     * @param {RobertNoyesDemoApi.Plant} request
+     * @param {RobertNoyes.Plant} request
      * @param {Plant.RequestOptions} requestOptions - Request-specific configuration.
      *
-     * @throws {@link RobertNoyesDemoApi.BadRequestError}
-     * @throws {@link RobertNoyesDemoApi.NotFoundError}
+     * @throws {@link RobertNoyes.BadRequestError}
+     * @throws {@link RobertNoyes.NotFoundError}
      *
      * @example
      *     await client.plant.updatePlant({
@@ -137,22 +134,22 @@ export class Plant {
      *     })
      */
     public updatePlant(
-        request: RobertNoyesDemoApi.Plant,
+        request: RobertNoyes.Plant,
         requestOptions?: Plant.RequestOptions,
-    ): core.HttpResponsePromise<RobertNoyesDemoApi.PlantResponse> {
+    ): core.HttpResponsePromise<RobertNoyes.PlantResponse> {
         return core.HttpResponsePromise.fromPromise(this.__updatePlant(request, requestOptions));
     }
 
     private async __updatePlant(
-        request: RobertNoyesDemoApi.Plant,
+        request: RobertNoyes.Plant,
         requestOptions?: Plant.RequestOptions,
-    ): Promise<core.WithRawResponse<RobertNoyesDemoApi.PlantResponse>> {
+    ): Promise<core.WithRawResponse<RobertNoyes.PlantResponse>> {
         let _headers: core.Fetcher.Args["headers"] = mergeHeaders(this._options?.headers, requestOptions?.headers);
         const _response = await core.fetcher({
             url: core.url.join(
                 (await core.Supplier.get(this._options.baseUrl)) ??
                     (await core.Supplier.get(this._options.environment)) ??
-                    environments.RobertNoyesDemoApiEnvironment.Default,
+                    environments.RobertNoyesEnvironment.Default,
                 "plant",
             ),
             method: "PUT",
@@ -166,20 +163,17 @@ export class Plant {
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return { data: _response.body as RobertNoyesDemoApi.PlantResponse, rawResponse: _response.rawResponse };
+            return { data: _response.body as RobertNoyes.PlantResponse, rawResponse: _response.rawResponse };
         }
 
         if (_response.error.reason === "status-code") {
             switch (_response.error.statusCode) {
                 case 400:
-                    throw new RobertNoyesDemoApi.BadRequestError(
-                        _response.error.body as unknown,
-                        _response.rawResponse,
-                    );
+                    throw new RobertNoyes.BadRequestError(_response.error.body as unknown, _response.rawResponse);
                 case 404:
-                    throw new RobertNoyesDemoApi.NotFoundError(_response.error.body as unknown, _response.rawResponse);
+                    throw new RobertNoyes.NotFoundError(_response.error.body as unknown, _response.rawResponse);
                 default:
-                    throw new errors.RobertNoyesDemoApiError({
+                    throw new errors.RobertNoyesError({
                         statusCode: _response.error.statusCode,
                         body: _response.error.body,
                         rawResponse: _response.rawResponse,
@@ -189,15 +183,15 @@ export class Plant {
 
         switch (_response.error.reason) {
             case "non-json":
-                throw new errors.RobertNoyesDemoApiError({
+                throw new errors.RobertNoyesError({
                     statusCode: _response.error.statusCode,
                     body: _response.error.rawBody,
                     rawResponse: _response.rawResponse,
                 });
             case "timeout":
-                throw new errors.RobertNoyesDemoApiTimeoutError("Timeout exceeded when calling PUT /plant.");
+                throw new errors.RobertNoyesTimeoutError("Timeout exceeded when calling PUT /plant.");
             case "unknown":
-                throw new errors.RobertNoyesDemoApiError({
+                throw new errors.RobertNoyesError({
                     message: _response.error.errorMessage,
                     rawResponse: _response.rawResponse,
                 });
@@ -207,23 +201,23 @@ export class Plant {
     /**
      * Filter plants based on their current status.
      *
-     * @param {RobertNoyesDemoApi.SearchPlantsByStatusRequest} request
+     * @param {RobertNoyes.SearchPlantsByStatusRequest} request
      * @param {Plant.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @example
      *     await client.plant.searchPlantsByStatus()
      */
     public searchPlantsByStatus(
-        request: RobertNoyesDemoApi.SearchPlantsByStatusRequest = {},
+        request: RobertNoyes.SearchPlantsByStatusRequest = {},
         requestOptions?: Plant.RequestOptions,
-    ): core.HttpResponsePromise<RobertNoyesDemoApi.PlantResponse[]> {
+    ): core.HttpResponsePromise<RobertNoyes.PlantResponse[]> {
         return core.HttpResponsePromise.fromPromise(this.__searchPlantsByStatus(request, requestOptions));
     }
 
     private async __searchPlantsByStatus(
-        request: RobertNoyesDemoApi.SearchPlantsByStatusRequest = {},
+        request: RobertNoyes.SearchPlantsByStatusRequest = {},
         requestOptions?: Plant.RequestOptions,
-    ): Promise<core.WithRawResponse<RobertNoyesDemoApi.PlantResponse[]>> {
+    ): Promise<core.WithRawResponse<RobertNoyes.PlantResponse[]>> {
         const { status } = request;
         const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
         if (status != null) {
@@ -235,7 +229,7 @@ export class Plant {
             url: core.url.join(
                 (await core.Supplier.get(this._options.baseUrl)) ??
                     (await core.Supplier.get(this._options.environment)) ??
-                    environments.RobertNoyesDemoApiEnvironment.Default,
+                    environments.RobertNoyesEnvironment.Default,
                 "plant/search/status",
             ),
             method: "GET",
@@ -246,11 +240,11 @@ export class Plant {
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return { data: _response.body as RobertNoyesDemoApi.PlantResponse[], rawResponse: _response.rawResponse };
+            return { data: _response.body as RobertNoyes.PlantResponse[], rawResponse: _response.rawResponse };
         }
 
         if (_response.error.reason === "status-code") {
-            throw new errors.RobertNoyesDemoApiError({
+            throw new errors.RobertNoyesError({
                 statusCode: _response.error.statusCode,
                 body: _response.error.body,
                 rawResponse: _response.rawResponse,
@@ -259,17 +253,15 @@ export class Plant {
 
         switch (_response.error.reason) {
             case "non-json":
-                throw new errors.RobertNoyesDemoApiError({
+                throw new errors.RobertNoyesError({
                     statusCode: _response.error.statusCode,
                     body: _response.error.rawBody,
                     rawResponse: _response.rawResponse,
                 });
             case "timeout":
-                throw new errors.RobertNoyesDemoApiTimeoutError(
-                    "Timeout exceeded when calling GET /plant/search/status.",
-                );
+                throw new errors.RobertNoyesTimeoutError("Timeout exceeded when calling GET /plant/search/status.");
             case "unknown":
-                throw new errors.RobertNoyesDemoApiError({
+                throw new errors.RobertNoyesError({
                     message: _response.error.errorMessage,
                     rawResponse: _response.rawResponse,
                 });
@@ -279,23 +271,23 @@ export class Plant {
     /**
      * Filter plants based on associated tags.
      *
-     * @param {RobertNoyesDemoApi.SearchPlantsByTagsRequest} request
+     * @param {RobertNoyes.SearchPlantsByTagsRequest} request
      * @param {Plant.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @example
      *     await client.plant.searchPlantsByTags()
      */
     public searchPlantsByTags(
-        request: RobertNoyesDemoApi.SearchPlantsByTagsRequest = {},
+        request: RobertNoyes.SearchPlantsByTagsRequest = {},
         requestOptions?: Plant.RequestOptions,
-    ): core.HttpResponsePromise<RobertNoyesDemoApi.PlantResponse[]> {
+    ): core.HttpResponsePromise<RobertNoyes.PlantResponse[]> {
         return core.HttpResponsePromise.fromPromise(this.__searchPlantsByTags(request, requestOptions));
     }
 
     private async __searchPlantsByTags(
-        request: RobertNoyesDemoApi.SearchPlantsByTagsRequest = {},
+        request: RobertNoyes.SearchPlantsByTagsRequest = {},
         requestOptions?: Plant.RequestOptions,
-    ): Promise<core.WithRawResponse<RobertNoyesDemoApi.PlantResponse[]>> {
+    ): Promise<core.WithRawResponse<RobertNoyes.PlantResponse[]>> {
         const { tags } = request;
         const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
         if (tags != null) {
@@ -311,7 +303,7 @@ export class Plant {
             url: core.url.join(
                 (await core.Supplier.get(this._options.baseUrl)) ??
                     (await core.Supplier.get(this._options.environment)) ??
-                    environments.RobertNoyesDemoApiEnvironment.Default,
+                    environments.RobertNoyesEnvironment.Default,
                 "plant/search/tags",
             ),
             method: "GET",
@@ -322,11 +314,11 @@ export class Plant {
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return { data: _response.body as RobertNoyesDemoApi.PlantResponse[], rawResponse: _response.rawResponse };
+            return { data: _response.body as RobertNoyes.PlantResponse[], rawResponse: _response.rawResponse };
         }
 
         if (_response.error.reason === "status-code") {
-            throw new errors.RobertNoyesDemoApiError({
+            throw new errors.RobertNoyesError({
                 statusCode: _response.error.statusCode,
                 body: _response.error.body,
                 rawResponse: _response.rawResponse,
@@ -335,17 +327,15 @@ export class Plant {
 
         switch (_response.error.reason) {
             case "non-json":
-                throw new errors.RobertNoyesDemoApiError({
+                throw new errors.RobertNoyesError({
                     statusCode: _response.error.statusCode,
                     body: _response.error.rawBody,
                     rawResponse: _response.rawResponse,
                 });
             case "timeout":
-                throw new errors.RobertNoyesDemoApiTimeoutError(
-                    "Timeout exceeded when calling GET /plant/search/tags.",
-                );
+                throw new errors.RobertNoyesTimeoutError("Timeout exceeded when calling GET /plant/search/tags.");
             case "unknown":
-                throw new errors.RobertNoyesDemoApiError({
+                throw new errors.RobertNoyesError({
                     message: _response.error.errorMessage,
                     rawResponse: _response.rawResponse,
                 });
@@ -355,7 +345,7 @@ export class Plant {
     /**
      * Retrieve a plant's details by its ID.
      *
-     * @param {RobertNoyesDemoApi.GetPlantByIdRequest} request
+     * @param {RobertNoyes.GetPlantByIdRequest} request
      * @param {Plant.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @example
@@ -364,23 +354,23 @@ export class Plant {
      *     })
      */
     public getPlantById(
-        request: RobertNoyesDemoApi.GetPlantByIdRequest,
+        request: RobertNoyes.GetPlantByIdRequest,
         requestOptions?: Plant.RequestOptions,
-    ): core.HttpResponsePromise<RobertNoyesDemoApi.PlantResponse> {
+    ): core.HttpResponsePromise<RobertNoyes.PlantResponse> {
         return core.HttpResponsePromise.fromPromise(this.__getPlantById(request, requestOptions));
     }
 
     private async __getPlantById(
-        request: RobertNoyesDemoApi.GetPlantByIdRequest,
+        request: RobertNoyes.GetPlantByIdRequest,
         requestOptions?: Plant.RequestOptions,
-    ): Promise<core.WithRawResponse<RobertNoyesDemoApi.PlantResponse>> {
+    ): Promise<core.WithRawResponse<RobertNoyes.PlantResponse>> {
         const { plantId } = request;
         let _headers: core.Fetcher.Args["headers"] = mergeHeaders(this._options?.headers, requestOptions?.headers);
         const _response = await core.fetcher({
             url: core.url.join(
                 (await core.Supplier.get(this._options.baseUrl)) ??
                     (await core.Supplier.get(this._options.environment)) ??
-                    environments.RobertNoyesDemoApiEnvironment.Default,
+                    environments.RobertNoyesEnvironment.Default,
                 `plant/${encodeURIComponent(plantId)}`,
             ),
             method: "GET",
@@ -391,11 +381,11 @@ export class Plant {
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return { data: _response.body as RobertNoyesDemoApi.PlantResponse, rawResponse: _response.rawResponse };
+            return { data: _response.body as RobertNoyes.PlantResponse, rawResponse: _response.rawResponse };
         }
 
         if (_response.error.reason === "status-code") {
-            throw new errors.RobertNoyesDemoApiError({
+            throw new errors.RobertNoyesError({
                 statusCode: _response.error.statusCode,
                 body: _response.error.body,
                 rawResponse: _response.rawResponse,
@@ -404,15 +394,15 @@ export class Plant {
 
         switch (_response.error.reason) {
             case "non-json":
-                throw new errors.RobertNoyesDemoApiError({
+                throw new errors.RobertNoyesError({
                     statusCode: _response.error.statusCode,
                     body: _response.error.rawBody,
                     rawResponse: _response.rawResponse,
                 });
             case "timeout":
-                throw new errors.RobertNoyesDemoApiTimeoutError("Timeout exceeded when calling GET /plant/{plantId}.");
+                throw new errors.RobertNoyesTimeoutError("Timeout exceeded when calling GET /plant/{plantId}.");
             case "unknown":
-                throw new errors.RobertNoyesDemoApiError({
+                throw new errors.RobertNoyesError({
                     message: _response.error.errorMessage,
                     rawResponse: _response.rawResponse,
                 });

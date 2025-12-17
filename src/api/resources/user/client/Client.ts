@@ -4,13 +4,13 @@
 
 import * as environments from "../../../../environments.js";
 import * as core from "../../../../core/index.js";
-import * as RobertNoyesDemoApi from "../../../index.js";
+import * as RobertNoyes from "../../../index.js";
 import { mergeHeaders } from "../../../../core/headers.js";
 import * as errors from "../../../../errors/index.js";
 
 export declare namespace User {
     export interface Options {
-        environment?: core.Supplier<environments.RobertNoyesDemoApiEnvironment | string>;
+        environment?: core.Supplier<environments.RobertNoyesEnvironment | string>;
         /** Specify a custom URL to connect the client to. */
         baseUrl?: core.Supplier<string>;
         /** Additional headers to include in requests. */
@@ -42,23 +42,23 @@ export class User {
     }
 
     /**
-     * @param {RobertNoyesDemoApi.LoginUserRequest} request
+     * @param {RobertNoyes.LoginUserRequest} request
      * @param {User.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @example
      *     await client.user.loginUser()
      */
     public loginUser(
-        request: RobertNoyesDemoApi.LoginUserRequest = {},
+        request: RobertNoyes.LoginUserRequest = {},
         requestOptions?: User.RequestOptions,
-    ): core.HttpResponsePromise<RobertNoyesDemoApi.UserAuthResponse> {
+    ): core.HttpResponsePromise<RobertNoyes.UserAuthResponse> {
         return core.HttpResponsePromise.fromPromise(this.__loginUser(request, requestOptions));
     }
 
     private async __loginUser(
-        request: RobertNoyesDemoApi.LoginUserRequest = {},
+        request: RobertNoyes.LoginUserRequest = {},
         requestOptions?: User.RequestOptions,
-    ): Promise<core.WithRawResponse<RobertNoyesDemoApi.UserAuthResponse>> {
+    ): Promise<core.WithRawResponse<RobertNoyes.UserAuthResponse>> {
         const { username, password } = request;
         const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
         if (username != null) {
@@ -74,7 +74,7 @@ export class User {
             url: core.url.join(
                 (await core.Supplier.get(this._options.baseUrl)) ??
                     (await core.Supplier.get(this._options.environment)) ??
-                    environments.RobertNoyesDemoApiEnvironment.Default,
+                    environments.RobertNoyesEnvironment.Default,
                 "user/auth/login",
             ),
             method: "GET",
@@ -85,11 +85,11 @@ export class User {
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return { data: _response.body as RobertNoyesDemoApi.UserAuthResponse, rawResponse: _response.rawResponse };
+            return { data: _response.body as RobertNoyes.UserAuthResponse, rawResponse: _response.rawResponse };
         }
 
         if (_response.error.reason === "status-code") {
-            throw new errors.RobertNoyesDemoApiError({
+            throw new errors.RobertNoyesError({
                 statusCode: _response.error.statusCode,
                 body: _response.error.body,
                 rawResponse: _response.rawResponse,
@@ -98,15 +98,15 @@ export class User {
 
         switch (_response.error.reason) {
             case "non-json":
-                throw new errors.RobertNoyesDemoApiError({
+                throw new errors.RobertNoyesError({
                     statusCode: _response.error.statusCode,
                     body: _response.error.rawBody,
                     rawResponse: _response.rawResponse,
                 });
             case "timeout":
-                throw new errors.RobertNoyesDemoApiTimeoutError("Timeout exceeded when calling GET /user/auth/login.");
+                throw new errors.RobertNoyesTimeoutError("Timeout exceeded when calling GET /user/auth/login.");
             case "unknown":
-                throw new errors.RobertNoyesDemoApiError({
+                throw new errors.RobertNoyesError({
                     message: _response.error.errorMessage,
                     rawResponse: _response.rawResponse,
                 });
@@ -129,7 +129,7 @@ export class User {
             url: core.url.join(
                 (await core.Supplier.get(this._options.baseUrl)) ??
                     (await core.Supplier.get(this._options.environment)) ??
-                    environments.RobertNoyesDemoApiEnvironment.Default,
+                    environments.RobertNoyesEnvironment.Default,
                 "user/auth/logout",
             ),
             method: "GET",
@@ -144,7 +144,7 @@ export class User {
         }
 
         if (_response.error.reason === "status-code") {
-            throw new errors.RobertNoyesDemoApiError({
+            throw new errors.RobertNoyesError({
                 statusCode: _response.error.statusCode,
                 body: _response.error.body,
                 rawResponse: _response.rawResponse,
@@ -153,15 +153,15 @@ export class User {
 
         switch (_response.error.reason) {
             case "non-json":
-                throw new errors.RobertNoyesDemoApiError({
+                throw new errors.RobertNoyesError({
                     statusCode: _response.error.statusCode,
                     body: _response.error.rawBody,
                     rawResponse: _response.rawResponse,
                 });
             case "timeout":
-                throw new errors.RobertNoyesDemoApiTimeoutError("Timeout exceeded when calling GET /user/auth/logout.");
+                throw new errors.RobertNoyesTimeoutError("Timeout exceeded when calling GET /user/auth/logout.");
             case "unknown":
-                throw new errors.RobertNoyesDemoApiError({
+                throw new errors.RobertNoyesError({
                     message: _response.error.errorMessage,
                     rawResponse: _response.rawResponse,
                 });
@@ -171,7 +171,7 @@ export class User {
     /**
      * Retrieve user details using their username.
      *
-     * @param {RobertNoyesDemoApi.GetUserByNameRequest} request
+     * @param {RobertNoyes.GetUserByNameRequest} request
      * @param {User.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @example
@@ -180,23 +180,23 @@ export class User {
      *     })
      */
     public getUserByName(
-        request: RobertNoyesDemoApi.GetUserByNameRequest,
+        request: RobertNoyes.GetUserByNameRequest,
         requestOptions?: User.RequestOptions,
-    ): core.HttpResponsePromise<RobertNoyesDemoApi.User> {
+    ): core.HttpResponsePromise<RobertNoyes.User> {
         return core.HttpResponsePromise.fromPromise(this.__getUserByName(request, requestOptions));
     }
 
     private async __getUserByName(
-        request: RobertNoyesDemoApi.GetUserByNameRequest,
+        request: RobertNoyes.GetUserByNameRequest,
         requestOptions?: User.RequestOptions,
-    ): Promise<core.WithRawResponse<RobertNoyesDemoApi.User>> {
+    ): Promise<core.WithRawResponse<RobertNoyes.User>> {
         const { username } = request;
         let _headers: core.Fetcher.Args["headers"] = mergeHeaders(this._options?.headers, requestOptions?.headers);
         const _response = await core.fetcher({
             url: core.url.join(
                 (await core.Supplier.get(this._options.baseUrl)) ??
                     (await core.Supplier.get(this._options.environment)) ??
-                    environments.RobertNoyesDemoApiEnvironment.Default,
+                    environments.RobertNoyesEnvironment.Default,
                 `user/${encodeURIComponent(username)}`,
             ),
             method: "GET",
@@ -207,11 +207,11 @@ export class User {
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return { data: _response.body as RobertNoyesDemoApi.User, rawResponse: _response.rawResponse };
+            return { data: _response.body as RobertNoyes.User, rawResponse: _response.rawResponse };
         }
 
         if (_response.error.reason === "status-code") {
-            throw new errors.RobertNoyesDemoApiError({
+            throw new errors.RobertNoyesError({
                 statusCode: _response.error.statusCode,
                 body: _response.error.body,
                 rawResponse: _response.rawResponse,
@@ -220,15 +220,15 @@ export class User {
 
         switch (_response.error.reason) {
             case "non-json":
-                throw new errors.RobertNoyesDemoApiError({
+                throw new errors.RobertNoyesError({
                     statusCode: _response.error.statusCode,
                     body: _response.error.rawBody,
                     rawResponse: _response.rawResponse,
                 });
             case "timeout":
-                throw new errors.RobertNoyesDemoApiTimeoutError("Timeout exceeded when calling GET /user/{username}.");
+                throw new errors.RobertNoyesTimeoutError("Timeout exceeded when calling GET /user/{username}.");
             case "unknown":
-                throw new errors.RobertNoyesDemoApiError({
+                throw new errors.RobertNoyesError({
                     message: _response.error.errorMessage,
                     rawResponse: _response.rawResponse,
                 });

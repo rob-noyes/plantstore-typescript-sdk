@@ -8,9 +8,9 @@ import { mergeHeaders } from "./core/headers.js";
 import { Plant } from "./api/resources/plant/client/Client.js";
 import { User } from "./api/resources/user/client/Client.js";
 
-export declare namespace RobertNoyesDemoApiClient {
+export declare namespace RobertNoyesClient {
     export interface Options {
-        environment?: core.Supplier<environments.RobertNoyesDemoApiEnvironment | string>;
+        environment?: core.Supplier<environments.RobertNoyesEnvironment | string>;
         /** Specify a custom URL to connect the client to. */
         baseUrl?: core.Supplier<string>;
         /** Additional headers to include in requests. */
@@ -31,19 +31,19 @@ export declare namespace RobertNoyesDemoApiClient {
     }
 }
 
-export class RobertNoyesDemoApiClient {
-    protected readonly _options: RobertNoyesDemoApiClient.Options;
+export class RobertNoyesClient {
+    protected readonly _options: RobertNoyesClient.Options;
     protected _plant: Plant | undefined;
     protected _user: User | undefined;
 
-    constructor(_options: RobertNoyesDemoApiClient.Options = {}) {
+    constructor(_options: RobertNoyesClient.Options = {}) {
         this._options = {
             ..._options,
             headers: mergeHeaders(
                 {
                     "X-Fern-Language": "JavaScript",
                     "X-Fern-SDK-Name": "robert-noyes-typescript-sdk",
-                    "X-Fern-SDK-Version": "0.0.3",
+                    "X-Fern-SDK-Version": "0.0.4",
                     "X-Fern-Runtime": core.RUNTIME.type,
                     "X-Fern-Runtime-Version": core.RUNTIME.version,
                 },

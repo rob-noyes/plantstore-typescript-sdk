@@ -3,12 +3,12 @@
  */
 
 import { mockServerPool } from "../mock-server/MockServerPool";
-import { RobertNoyesDemoApiClient } from "../../src/Client";
+import { RobertNoyesClient } from "../../src/Client";
 
 describe("User", () => {
     test("loginUser", async () => {
         const server = mockServerPool.createServer();
-        const client = new RobertNoyesDemoApiClient({ environment: server.baseUrl });
+        const client = new RobertNoyesClient({ environment: server.baseUrl });
 
         const rawResponseBody = { token: "abc123token", expiresIn: 3600 };
         server.mockEndpoint().get("/user/auth/login").respondWith().statusCode(200).jsonBody(rawResponseBody).build();
@@ -22,7 +22,7 @@ describe("User", () => {
 
     test("logoutUser", async () => {
         const server = mockServerPool.createServer();
-        const client = new RobertNoyesDemoApiClient({ environment: server.baseUrl });
+        const client = new RobertNoyesClient({ environment: server.baseUrl });
 
         server.mockEndpoint().get("/user/auth/logout").respondWith().statusCode(200).build();
 
@@ -32,7 +32,7 @@ describe("User", () => {
 
     test("getUserByName", async () => {
         const server = mockServerPool.createServer();
-        const client = new RobertNoyesDemoApiClient({ environment: server.baseUrl });
+        const client = new RobertNoyesClient({ environment: server.baseUrl });
 
         const rawResponseBody = { id: 1, username: "john_doe", email: "john@example.com" };
         server.mockEndpoint().get("/user/username").respondWith().statusCode(200).jsonBody(rawResponseBody).build();

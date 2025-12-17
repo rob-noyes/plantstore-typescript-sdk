@@ -3,13 +3,13 @@
  */
 
 import { mockServerPool } from "../mock-server/MockServerPool";
-import { RobertNoyesDemoApiClient } from "../../src/Client";
-import * as RobertNoyesDemoApi from "../../src/api/index";
+import { RobertNoyesClient } from "../../src/Client";
+import * as RobertNoyes from "../../src/api/index";
 
 describe("Plant", () => {
     test("addPlant (1)", async () => {
         const server = mockServerPool.createServer();
-        const client = new RobertNoyesDemoApiClient({ environment: server.baseUrl });
+        const client = new RobertNoyesClient({ environment: server.baseUrl });
         const rawRequestBody = { name: "Fern", category: "Indoor", tags: ["green", "leafy"], status: "available" };
         const rawResponseBody = { id: 101, name: "Fern", status: "available", tags: ["green", "leafy"] };
         server
@@ -37,7 +37,7 @@ describe("Plant", () => {
 
     test("addPlant (2)", async () => {
         const server = mockServerPool.createServer();
-        const client = new RobertNoyesDemoApiClient({ environment: server.baseUrl });
+        const client = new RobertNoyesClient({ environment: server.baseUrl });
         const rawRequestBody = { name: undefined, category: undefined, tags: undefined, status: undefined };
         const rawResponseBody = { key: "value" };
         server
@@ -56,12 +56,12 @@ describe("Plant", () => {
                 tags: undefined,
                 status: undefined,
             });
-        }).rejects.toThrow(RobertNoyesDemoApi.MethodNotAllowedError);
+        }).rejects.toThrow(RobertNoyes.MethodNotAllowedError);
     });
 
     test("updatePlant (1)", async () => {
         const server = mockServerPool.createServer();
-        const client = new RobertNoyesDemoApiClient({ environment: server.baseUrl });
+        const client = new RobertNoyesClient({ environment: server.baseUrl });
         const rawRequestBody = { name: "Fern", category: "Indoor", tags: ["green", "leafy"], status: "sold" };
         const rawResponseBody = { id: 101, name: "Fern", status: "sold", tags: ["green", "leafy"] };
         server
@@ -89,7 +89,7 @@ describe("Plant", () => {
 
     test("updatePlant (2)", async () => {
         const server = mockServerPool.createServer();
-        const client = new RobertNoyesDemoApiClient({ environment: server.baseUrl });
+        const client = new RobertNoyesClient({ environment: server.baseUrl });
         const rawRequestBody = { name: undefined, category: undefined, tags: undefined, status: undefined };
         const rawResponseBody = { key: "value" };
         server
@@ -108,12 +108,12 @@ describe("Plant", () => {
                 tags: undefined,
                 status: undefined,
             });
-        }).rejects.toThrow(RobertNoyesDemoApi.BadRequestError);
+        }).rejects.toThrow(RobertNoyes.BadRequestError);
     });
 
     test("updatePlant (3)", async () => {
         const server = mockServerPool.createServer();
-        const client = new RobertNoyesDemoApiClient({ environment: server.baseUrl });
+        const client = new RobertNoyesClient({ environment: server.baseUrl });
         const rawRequestBody = { name: undefined, category: undefined, tags: undefined, status: undefined };
         const rawResponseBody = { key: "value" };
         server
@@ -132,12 +132,12 @@ describe("Plant", () => {
                 tags: undefined,
                 status: undefined,
             });
-        }).rejects.toThrow(RobertNoyesDemoApi.NotFoundError);
+        }).rejects.toThrow(RobertNoyes.NotFoundError);
     });
 
     test("searchPlantsByStatus", async () => {
         const server = mockServerPool.createServer();
-        const client = new RobertNoyesDemoApiClient({ environment: server.baseUrl });
+        const client = new RobertNoyesClient({ environment: server.baseUrl });
 
         const rawResponseBody = [
             { id: 101, name: "Fern", status: "available", tags: ["green", "leafy"] },
@@ -170,7 +170,7 @@ describe("Plant", () => {
 
     test("searchPlantsByTags", async () => {
         const server = mockServerPool.createServer();
-        const client = new RobertNoyesDemoApiClient({ environment: server.baseUrl });
+        const client = new RobertNoyesClient({ environment: server.baseUrl });
 
         const rawResponseBody = [
             { id: 101, name: "Fern", status: "available", tags: ["green", "leafy"] },
@@ -197,7 +197,7 @@ describe("Plant", () => {
 
     test("getPlantById", async () => {
         const server = mockServerPool.createServer();
-        const client = new RobertNoyesDemoApiClient({ environment: server.baseUrl });
+        const client = new RobertNoyesClient({ environment: server.baseUrl });
 
         const rawResponseBody = { id: 101, name: "Fern", status: "available", tags: ["green", "leafy"] };
         server.mockEndpoint().get("/plant/1").respondWith().statusCode(200).jsonBody(rawResponseBody).build();

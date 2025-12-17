@@ -1,2 +1,2 @@
-export { RobertNoyesDemoApiError } from "./RobertNoyesDemoApiError.js";
-export { RobertNoyesDemoApiTimeoutError } from "./RobertNoyesDemoApiTimeoutError.js";
+export { RobertNoyesError } from "./RobertNoyesError.js";
+export { RobertNoyesTimeoutError } from "./RobertNoyesTimeoutError.js";

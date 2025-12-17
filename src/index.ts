@@ -1,4 +1,4 @@
-export * as RobertNoyesDemoApi from "./api/index.js";
-export { RobertNoyesDemoApiError, RobertNoyesDemoApiTimeoutError } from "./errors/index.js";
-export { RobertNoyesDemoApiClient } from "./Client.js";
-export { RobertNoyesDemoApiEnvironment } from "./environments.js";
+export * as RobertNoyes from "./api/index.js";
+export { RobertNoyesError, RobertNoyesTimeoutError } from "./errors/index.js";
+export { RobertNoyesClient } from "./Client.js";
+export { RobertNoyesEnvironment } from "./environments.js";

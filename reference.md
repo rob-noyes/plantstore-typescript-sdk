@@ -2,7 +2,7 @@
 
 ## plant
 
-<details><summary><code>client.plant.<a href="/src/api/resources/plant/client/Client.ts">addPlant</a>({ ...params }) -> RobertNoyesDemoApi.PlantResponse</code></summary>
+<details><summary><code>client.plant.<a href="/src/api/resources/plant/client/Client.ts">addPlant</a>({ ...params }) -> RobertNoyes.PlantResponse</code></summary>
 <dl>
 <dd>
 
@@ -36,7 +36,7 @@ await client.plant.addPlant({
 <dl>
 <dd>
 
-**request:** `RobertNoyesDemoApi.Plant`
+**request:** `RobertNoyes.Plant`
 
 </dd>
 </dl>
@@ -55,7 +55,7 @@ await client.plant.addPlant({
 </dl>
 </details>
 
-<details><summary><code>client.plant.<a href="/src/api/resources/plant/client/Client.ts">updatePlant</a>({ ...params }) -> RobertNoyesDemoApi.PlantResponse</code></summary>
+<details><summary><code>client.plant.<a href="/src/api/resources/plant/client/Client.ts">updatePlant</a>({ ...params }) -> RobertNoyes.PlantResponse</code></summary>
 <dl>
 <dd>
 
@@ -89,7 +89,7 @@ await client.plant.updatePlant({
 <dl>
 <dd>
 
-**request:** `RobertNoyesDemoApi.Plant`
+**request:** `RobertNoyes.Plant`
 
 </dd>
 </dl>
@@ -108,7 +108,7 @@ await client.plant.updatePlant({
 </dl>
 </details>
 
-<details><summary><code>client.plant.<a href="/src/api/resources/plant/client/Client.ts">searchPlantsByStatus</a>({ ...params }) -> RobertNoyesDemoApi.PlantResponse[]</code></summary>
+<details><summary><code>client.plant.<a href="/src/api/resources/plant/client/Client.ts">searchPlantsByStatus</a>({ ...params }) -> RobertNoyes.PlantResponse[]</code></summary>
 <dl>
 <dd>
 
@@ -152,7 +152,7 @@ await client.plant.searchPlantsByStatus();
 <dl>
 <dd>
 
-**request:** `RobertNoyesDemoApi.SearchPlantsByStatusRequest`
+**request:** `RobertNoyes.SearchPlantsByStatusRequest`
 
 </dd>
 </dl>
@@ -171,7 +171,7 @@ await client.plant.searchPlantsByStatus();
 </dl>
 </details>
 
-<details><summary><code>client.plant.<a href="/src/api/resources/plant/client/Client.ts">searchPlantsByTags</a>({ ...params }) -> RobertNoyesDemoApi.PlantResponse[]</code></summary>
+<details><summary><code>client.plant.<a href="/src/api/resources/plant/client/Client.ts">searchPlantsByTags</a>({ ...params }) -> RobertNoyes.PlantResponse[]</code></summary>
 <dl>
 <dd>
 
@@ -215,7 +215,7 @@ await client.plant.searchPlantsByTags();
 <dl>
 <dd>
 
-**request:** `RobertNoyesDemoApi.SearchPlantsByTagsRequest`
+**request:** `RobertNoyes.SearchPlantsByTagsRequest`
 
 </dd>
 </dl>
@@ -234,7 +234,7 @@ await client.plant.searchPlantsByTags();
 </dl>
 </details>
 
-<details><summary><code>client.plant.<a href="/src/api/resources/plant/client/Client.ts">getPlantById</a>({ ...params }) -> RobertNoyesDemoApi.PlantResponse</code></summary>
+<details><summary><code>client.plant.<a href="/src/api/resources/plant/client/Client.ts">getPlantById</a>({ ...params }) -> RobertNoyes.PlantResponse</code></summary>
 <dl>
 <dd>
 
@@ -280,7 +280,7 @@ await client.plant.getPlantById({
 <dl>
 <dd>
 
-**request:** `RobertNoyesDemoApi.GetPlantByIdRequest`
+**request:** `RobertNoyes.GetPlantByIdRequest`
 
 </dd>
 </dl>
@@ -301,7 +301,7 @@ await client.plant.getPlantById({
 
 ## user
 
-<details><summary><code>client.user.<a href="/src/api/resources/user/client/Client.ts">loginUser</a>({ ...params }) -> RobertNoyesDemoApi.UserAuthResponse</code></summary>
+<details><summary><code>client.user.<a href="/src/api/resources/user/client/Client.ts">loginUser</a>({ ...params }) -> RobertNoyes.UserAuthResponse</code></summary>
 <dl>
 <dd>
 
@@ -330,7 +330,7 @@ await client.user.loginUser();
 <dl>
 <dd>
 
-**request:** `RobertNoyesDemoApi.LoginUserRequest`
+**request:** `RobertNoyes.LoginUserRequest`
 
 </dd>
 </dl>
@@ -389,7 +389,7 @@ await client.user.logoutUser();
 </dl>
 </details>
 
-<details><summary><code>client.user.<a href="/src/api/resources/user/client/Client.ts">getUserByName</a>({ ...params }) -> RobertNoyesDemoApi.User</code></summary>
+<details><summary><code>client.user.<a href="/src/api/resources/user/client/Client.ts">getUserByName</a>({ ...params }) -> RobertNoyes.User</code></summary>
 <dl>
 <dd>
 
@@ -435,7 +435,7 @@ await client.user.getUserByName({
 <dl>
 <dd>
 
-**request:** `RobertNoyesDemoApi.GetUserByNameRequest`
+**request:** `RobertNoyes.GetUserByNameRequest`
 
 </dd>
 </dl>

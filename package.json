@@ -1,6 +1,6 @@
 {
     "name": "robert-noyes-typescript-sdk",
-    "version": "0.0.3",
+    "version": "0.0.4",
     "private": false,
     "repository": "github:rob-noyes/robert-noyes-typescript-sdk",
     "type": "commonjs",
