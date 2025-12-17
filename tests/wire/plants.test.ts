@@ -3,13 +3,13 @@
  */
 
 import { mockServerPool } from "../mock-server/MockServerPool";
-import { RobertNoyesClient } from "../../src/Client";
-import * as RobertNoyes from "../../src/api/index";
+import { PlantStoreClient } from "../../src/Client";
+import * as PlantStore from "../../src/api/index";
 
-describe("Plant", () => {
-    test("addPlant (1)", async () => {
+describe("Plants", () => {
+    test("create (1)", async () => {
         const server = mockServerPool.createServer();
-        const client = new RobertNoyesClient({ environment: server.baseUrl });
+        const client = new PlantStoreClient({ environment: server.baseUrl });
         const rawRequestBody = { name: "Fern", category: "Indoor", tags: ["green", "leafy"], status: "available" };
         const rawResponseBody = { id: 101, name: "Fern", status: "available", tags: ["green", "leafy"] };
         server
@@ -21,7 +21,7 @@ describe("Plant", () => {
             .jsonBody(rawResponseBody)
             .build();
 
-        const response = await client.plant.addPlant({
+        const response = await client.plants.create({
             name: "Fern",
             category: "Indoor",
             tags: ["green", "leafy"],
@@ -35,9 +35,9 @@ describe("Plant", () => {
         });
     });
 
-    test("addPlant (2)", async () => {
+    test("create (2)", async () => {
         const server = mockServerPool.createServer();
-        const client = new RobertNoyesClient({ environment: server.baseUrl });
+        const client = new PlantStoreClient({ environment: server.baseUrl });
         const rawRequestBody = { name: undefined, category: undefined, tags: undefined, status: undefined };
         const rawResponseBody = { key: "value" };
         server
@@ -50,18 +50,18 @@ describe("Plant", () => {
             .build();
 
         await expect(async () => {
-            return await client.plant.addPlant({
+            return await client.plants.create({
                 name: undefined,
                 category: undefined,
                 tags: undefined,
                 status: undefined,
             });
-        }).rejects.toThrow(RobertNoyes.MethodNotAllowedError);
+        }).rejects.toThrow(PlantStore.MethodNotAllowedError);
     });
 
-    test("updatePlant (1)", async () => {
+    test("update (1)", async () => {
         const server = mockServerPool.createServer();
-        const client = new RobertNoyesClient({ environment: server.baseUrl });
+        const client = new PlantStoreClient({ environment: server.baseUrl });
         const rawRequestBody = { name: "Fern", category: "Indoor", tags: ["green", "leafy"], status: "sold" };
         const rawResponseBody = { id: 101, name: "Fern", status: "sold", tags: ["green", "leafy"] };
         server
@@ -73,7 +73,7 @@ describe("Plant", () => {
             .jsonBody(rawResponseBody)
             .build();
 
-        const response = await client.plant.updatePlant({
+        const response = await client.plants.update({
             name: "Fern",
             category: "Indoor",
             tags: ["green", "leafy"],
@@ -87,9 +87,9 @@ describe("Plant", () => {
         });
     });
 
-    test("updatePlant (2)", async () => {
+    test("update (2)", async () => {
         const server = mockServerPool.createServer();
-        const client = new RobertNoyesClient({ environment: server.baseUrl });
+        const client = new PlantStoreClient({ environment: server.baseUrl });
         const rawRequestBody = { name: undefined, category: undefined, tags: undefined, status: undefined };
         const rawResponseBody = { key: "value" };
         server
@@ -102,18 +102,18 @@ describe("Plant", () => {
             .build();
 
         await expect(async () => {
-            return await client.plant.updatePlant({
+            return await client.plants.update({
                 name: undefined,
                 category: undefined,
                 tags: undefined,
                 status: undefined,
             });
-        }).rejects.toThrow(RobertNoyes.BadRequestError);
+        }).rejects.toThrow(PlantStore.BadRequestError);
     });
 
-    test("updatePlant (3)", async () => {
+    test("update (3)", async () => {
         const server = mockServerPool.createServer();
-        const client = new RobertNoyesClient({ environment: server.baseUrl });
+        const client = new PlantStoreClient({ environment: server.baseUrl });
         const rawRequestBody = { name: undefined, category: undefined, tags: undefined, status: undefined };
         const rawResponseBody = { key: "value" };
         server
@@ -126,18 +126,18 @@ describe("Plant", () => {
             .build();
 
         await expect(async () => {
-            return await client.plant.updatePlant({
+            return await client.plants.update({
                 name: undefined,
                 category: undefined,
                 tags: undefined,
                 status: undefined,
             });
-        }).rejects.toThrow(RobertNoyes.NotFoundError);
+        }).rejects.toThrow(PlantStore.NotFoundError);
     });
 
-    test("searchPlantsByStatus", async () => {
+    test("listByStatus", async () => {
         const server = mockServerPool.createServer();
-        const client = new RobertNoyesClient({ environment: server.baseUrl });
+        const client = new PlantStoreClient({ environment: server.baseUrl });
 
         const rawResponseBody = [
             { id: 101, name: "Fern", status: "available", tags: ["green", "leafy"] },
@@ -151,7 +151,7 @@ describe("Plant", () => {
             .jsonBody(rawResponseBody)
             .build();
 
-        const response = await client.plant.searchPlantsByStatus();
+        const response = await client.plants.listByStatus();
         expect(response).toEqual([
             {
                 id: 101,
@@ -168,9 +168,9 @@ describe("Plant", () => {
         ]);
     });
 
-    test("searchPlantsByTags", async () => {
+    test("listByTags", async () => {
         const server = mockServerPool.createServer();
-        const client = new RobertNoyesClient({ environment: server.baseUrl });
+        const client = new PlantStoreClient({ environment: server.baseUrl });
 
         const rawResponseBody = [
             { id: 101, name: "Fern", status: "available", tags: ["green", "leafy"] },
@@ -178,7 +178,7 @@ describe("Plant", () => {
         ];
         server.mockEndpoint().get("/plant/search/tags").respondWith().statusCode(200).jsonBody(rawResponseBody).build();
 
-        const response = await client.plant.searchPlantsByTags();
+        const response = await client.plants.listByTags();
         expect(response).toEqual([
             {
                 id: 101,
@@ -195,14 +195,14 @@ describe("Plant", () => {
         ]);
     });
 
-    test("getPlantById", async () => {
+    test("get", async () => {
         const server = mockServerPool.createServer();
-        const client = new RobertNoyesClient({ environment: server.baseUrl });
+        const client = new PlantStoreClient({ environment: server.baseUrl });
 
         const rawResponseBody = { id: 101, name: "Fern", status: "available", tags: ["green", "leafy"] };
         server.mockEndpoint().get("/plant/1").respondWith().statusCode(200).jsonBody(rawResponseBody).build();
 
-        const response = await client.plant.getPlantById({
+        const response = await client.plants.get({
             plantId: 1,
         });
         expect(response).toEqual({

@@ -1,2 +1,2 @@
-export { RobertNoyesError } from "./RobertNoyesError.js";
-export { RobertNoyesTimeoutError } from "./RobertNoyesTimeoutError.js";
+export { PlantStoreError } from "./PlantStoreError.js";
+export { PlantStoreTimeoutError } from "./PlantStoreTimeoutError.js";

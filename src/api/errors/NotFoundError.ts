@@ -5,7 +5,7 @@
 import * as errors from "../../errors/index.js";
 import * as core from "../../core/index.js";
 
-export class NotFoundError extends errors.RobertNoyesError {
+export class NotFoundError extends errors.PlantStoreError {
     constructor(body?: unknown, rawResponse?: core.RawResponse) {
         super({
             message: "NotFoundError",

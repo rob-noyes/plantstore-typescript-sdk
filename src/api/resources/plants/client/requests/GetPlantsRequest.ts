@@ -8,7 +8,7 @@
  *         plantId: 1
  *     }
  */
-export interface GetPlantByIdRequest {
+export interface GetPlantsRequest {
     /** ID of the plant to retrieve */
     plantId: number;
 }

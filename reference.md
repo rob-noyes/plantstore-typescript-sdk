@@ -1,8 +1,8 @@
 # Reference
 
-## plant
+## Plants
 
-<details><summary><code>client.plant.<a href="/src/api/resources/plant/client/Client.ts">addPlant</a>({ ...params }) -> RobertNoyes.PlantResponse</code></summary>
+<details><summary><code>client.plants.<a href="/src/api/resources/plants/client/Client.ts">create</a>({ ...params }) -> PlantStore.PlantResponse</code></summary>
 <dl>
 <dd>
 
@@ -15,7 +15,7 @@
 <dd>
 
 ```typescript
-await client.plant.addPlant({
+await client.plants.create({
     name: "Fern",
     category: "Indoor",
     tags: ["green", "leafy"],
@@ -36,7 +36,7 @@ await client.plant.addPlant({
 <dl>
 <dd>
 
-**request:** `RobertNoyes.Plant`
+**request:** `PlantStore.Plant`
 
 </dd>
 </dl>
@@ -44,7 +44,7 @@ await client.plant.addPlant({
 <dl>
 <dd>
 
-**requestOptions:** `Plant.RequestOptions`
+**requestOptions:** `Plants.RequestOptions`
 
 </dd>
 </dl>
@@ -55,7 +55,7 @@ await client.plant.addPlant({
 </dl>
 </details>
 
-<details><summary><code>client.plant.<a href="/src/api/resources/plant/client/Client.ts">updatePlant</a>({ ...params }) -> RobertNoyes.PlantResponse</code></summary>
+<details><summary><code>client.plants.<a href="/src/api/resources/plants/client/Client.ts">update</a>({ ...params }) -> PlantStore.PlantResponse</code></summary>
 <dl>
 <dd>
 
@@ -68,7 +68,7 @@ await client.plant.addPlant({
 <dd>
 
 ```typescript
-await client.plant.updatePlant({
+await client.plants.update({
     name: "Fern",
     category: "Indoor",
     tags: ["green", "leafy"],
@@ -89,7 +89,7 @@ await client.plant.updatePlant({
 <dl>
 <dd>
 
-**request:** `RobertNoyes.Plant`
+**request:** `PlantStore.Plant`
 
 </dd>
 </dl>
@@ -97,7 +97,7 @@ await client.plant.updatePlant({
 <dl>
 <dd>
 
-**requestOptions:** `Plant.RequestOptions`
+**requestOptions:** `Plants.RequestOptions`
 
 </dd>
 </dl>
@@ -108,7 +108,7 @@ await client.plant.updatePlant({
 </dl>
 </details>
 
-<details><summary><code>client.plant.<a href="/src/api/resources/plant/client/Client.ts">searchPlantsByStatus</a>({ ...params }) -> RobertNoyes.PlantResponse[]</code></summary>
+<details><summary><code>client.plants.<a href="/src/api/resources/plants/client/Client.ts">listByStatus</a>({ ...params }) -> PlantStore.PlantResponse[]</code></summary>
 <dl>
 <dd>
 
@@ -136,7 +136,7 @@ Filter plants based on their current status.
 <dd>
 
 ```typescript
-await client.plant.searchPlantsByStatus();
+await client.plants.listByStatus();
 ```
 
 </dd>
@@ -152,7 +152,7 @@ await client.plant.searchPlantsByStatus();
 <dl>
 <dd>
 
-**request:** `RobertNoyes.SearchPlantsByStatusRequest`
+**request:** `PlantStore.ListByStatusPlantsRequest`
 
 </dd>
 </dl>
@@ -160,7 +160,7 @@ await client.plant.searchPlantsByStatus();
 <dl>
 <dd>
 
-**requestOptions:** `Plant.RequestOptions`
+**requestOptions:** `Plants.RequestOptions`
 
 </dd>
 </dl>
@@ -171,7 +171,7 @@ await client.plant.searchPlantsByStatus();
 </dl>
 </details>
 
-<details><summary><code>client.plant.<a href="/src/api/resources/plant/client/Client.ts">searchPlantsByTags</a>({ ...params }) -> RobertNoyes.PlantResponse[]</code></summary>
+<details><summary><code>client.plants.<a href="/src/api/resources/plants/client/Client.ts">listByTags</a>({ ...params }) -> PlantStore.PlantResponse[]</code></summary>
 <dl>
 <dd>
 
@@ -199,7 +199,7 @@ Filter plants based on associated tags.
 <dd>
 
 ```typescript
-await client.plant.searchPlantsByTags();
+await client.plants.listByTags();
 ```
 
 </dd>
@@ -215,7 +215,7 @@ await client.plant.searchPlantsByTags();
 <dl>
 <dd>
 
-**request:** `RobertNoyes.SearchPlantsByTagsRequest`
+**request:** `PlantStore.ListByTagsPlantsRequest`
 
 </dd>
 </dl>
@@ -223,7 +223,7 @@ await client.plant.searchPlantsByTags();
 <dl>
 <dd>
 
-**requestOptions:** `Plant.RequestOptions`
+**requestOptions:** `Plants.RequestOptions`
 
 </dd>
 </dl>
@@ -234,7 +234,7 @@ await client.plant.searchPlantsByTags();
 </dl>
 </details>
 
-<details><summary><code>client.plant.<a href="/src/api/resources/plant/client/Client.ts">getPlantById</a>({ ...params }) -> RobertNoyes.PlantResponse</code></summary>
+<details><summary><code>client.plants.<a href="/src/api/resources/plants/client/Client.ts">get</a>({ ...params }) -> PlantStore.PlantResponse</code></summary>
 <dl>
 <dd>
 
@@ -262,7 +262,7 @@ Retrieve a plant's details by its ID.
 <dd>
 
 ```typescript
-await client.plant.getPlantById({
+await client.plants.get({
     plantId: 1,
 });
 ```
@@ -280,7 +280,7 @@ await client.plant.getPlantById({
 <dl>
 <dd>
 
-**request:** `RobertNoyes.GetPlantByIdRequest`
+**request:** `PlantStore.GetPlantsRequest`
 
 </dd>
 </dl>
@@ -288,7 +288,7 @@ await client.plant.getPlantById({
 <dl>
 <dd>
 
-**requestOptions:** `Plant.RequestOptions`
+**requestOptions:** `Plants.RequestOptions`
 
 </dd>
 </dl>
@@ -299,9 +299,9 @@ await client.plant.getPlantById({
 </dl>
 </details>
 
-## user
+## Auth
 
-<details><summary><code>client.user.<a href="/src/api/resources/user/client/Client.ts">loginUser</a>({ ...params }) -> RobertNoyes.UserAuthResponse</code></summary>
+<details><summary><code>client.auth.<a href="/src/api/resources/auth/client/Client.ts">login</a>({ ...params }) -> PlantStore.UserAuthResponse</code></summary>
 <dl>
 <dd>
 
@@ -314,7 +314,7 @@ await client.plant.getPlantById({
 <dd>
 
 ```typescript
-await client.user.loginUser();
+await client.auth.login();
 ```
 
 </dd>
@@ -330,7 +330,7 @@ await client.user.loginUser();
 <dl>
 <dd>
 
-**request:** `RobertNoyes.LoginUserRequest`
+**request:** `PlantStore.LoginAuthRequest`
 
 </dd>
 </dl>
@@ -338,7 +338,7 @@ await client.user.loginUser();
 <dl>
 <dd>
 
-**requestOptions:** `User.RequestOptions`
+**requestOptions:** `Auth.RequestOptions`
 
 </dd>
 </dl>
@@ -349,7 +349,7 @@ await client.user.loginUser();
 </dl>
 </details>
 
-<details><summary><code>client.user.<a href="/src/api/resources/user/client/Client.ts">logoutUser</a>() -> void</code></summary>
+<details><summary><code>client.auth.<a href="/src/api/resources/auth/client/Client.ts">logout</a>() -> void</code></summary>
 <dl>
 <dd>
 
@@ -362,7 +362,7 @@ await client.user.loginUser();
 <dd>
 
 ```typescript
-await client.user.logoutUser();
+await client.auth.logout();
 ```
 
 </dd>
@@ -378,7 +378,7 @@ await client.user.logoutUser();
 <dl>
 <dd>
 
-**requestOptions:** `User.RequestOptions`
+**requestOptions:** `Auth.RequestOptions`
 
 </dd>
 </dl>
@@ -389,7 +389,9 @@ await client.user.logoutUser();
 </dl>
 </details>
 
-<details><summary><code>client.user.<a href="/src/api/resources/user/client/Client.ts">getUserByName</a>({ ...params }) -> RobertNoyes.User</code></summary>
+## Users
+
+<details><summary><code>client.users.<a href="/src/api/resources/users/client/Client.ts">get</a>({ ...params }) -> PlantStore.User</code></summary>
 <dl>
 <dd>
 
@@ -417,7 +419,7 @@ Retrieve user details using their username.
 <dd>
 
 ```typescript
-await client.user.getUserByName({
+await client.users.get({
     username: "username",
 });
 ```
@@ -435,7 +437,7 @@ await client.user.getUserByName({
 <dl>
 <dd>
 
-**request:** `RobertNoyes.GetUserByNameRequest`
+**request:** `PlantStore.GetUsersRequest`
 
 </dd>
 </dl>
@@ -443,7 +445,7 @@ await client.user.getUserByName({
 <dl>
 <dd>
 
-**requestOptions:** `User.RequestOptions`
+**requestOptions:** `Users.RequestOptions`
 
 </dd>
 </dl>

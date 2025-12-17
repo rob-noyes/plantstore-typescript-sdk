@@ -6,7 +6,7 @@
  * @example
  *     {}
  */
-export interface SearchPlantsByTagsRequest {
+export interface ListByTagsPlantsRequest {
     /** Tags to filter plants (comma-separated). */
     tags?: string | string[];
 }

@@ -6,7 +6,7 @@
  * @example
  *     {}
  */
-export interface LoginUserRequest {
+export interface LoginAuthRequest {
     /** The username for login */
     username?: string;
     /** The password for login */

@@ -5,12 +5,13 @@
 import * as environments from "./environments.js";
 import * as core from "./core/index.js";
 import { mergeHeaders } from "./core/headers.js";
-import { Plant } from "./api/resources/plant/client/Client.js";
-import { User } from "./api/resources/user/client/Client.js";
+import { Plants } from "./api/resources/plants/client/Client.js";
+import { Auth } from "./api/resources/auth/client/Client.js";
+import { Users } from "./api/resources/users/client/Client.js";
 
-export declare namespace RobertNoyesClient {
+export declare namespace PlantStoreClient {
     export interface Options {
-        environment?: core.Supplier<environments.RobertNoyesEnvironment | string>;
+        environment?: core.Supplier<environments.PlantStoreEnvironment | string>;
         /** Specify a custom URL to connect the client to. */
         baseUrl?: core.Supplier<string>;
         /** Additional headers to include in requests. */
@@ -31,19 +32,20 @@ export declare namespace RobertNoyesClient {
     }
 }
 
-export class RobertNoyesClient {
-    protected readonly _options: RobertNoyesClient.Options;
-    protected _plant: Plant | undefined;
-    protected _user: User | undefined;
+export class PlantStoreClient {
+    protected readonly _options: PlantStoreClient.Options;
+    protected _plants: Plants | undefined;
+    protected _auth: Auth | undefined;
+    protected _users: Users | undefined;
 
-    constructor(_options: RobertNoyesClient.Options = {}) {
+    constructor(_options: PlantStoreClient.Options = {}) {
         this._options = {
             ..._options,
             headers: mergeHeaders(
                 {
                     "X-Fern-Language": "JavaScript",
-                    "X-Fern-SDK-Name": "robert-noyes-typescript-sdk",
-                    "X-Fern-SDK-Version": "0.0.4",
+                    "X-Fern-SDK-Name": "plantstore-typescript-sdk",
+                    "X-Fern-SDK-Version": "0.0.5",
                     "X-Fern-Runtime": core.RUNTIME.type,
                     "X-Fern-Runtime-Version": core.RUNTIME.version,
                 },
@@ -52,11 +54,15 @@ export class RobertNoyesClient {
         };
     }
 
-    public get plant(): Plant {
-        return (this._plant ??= new Plant(this._options));
+    public get plants(): Plants {
+        return (this._plants ??= new Plants(this._options));
     }
 
-    public get user(): User {
-        return (this._user ??= new User(this._options));
+    public get auth(): Auth {
+        return (this._auth ??= new Auth(this._options));
+    }
+
+    public get users(): Users {
+        return (this._users ??= new Users(this._options));
     }
 }

@@ -4,13 +4,13 @@
 
 import * as environments from "../../../../environments.js";
 import * as core from "../../../../core/index.js";
-import * as RobertNoyes from "../../../index.js";
+import * as PlantStore from "../../../index.js";
 import { mergeHeaders } from "../../../../core/headers.js";
 import * as errors from "../../../../errors/index.js";
 
-export declare namespace Plant {
+export declare namespace Plants {
     export interface Options {
-        environment?: core.Supplier<environments.RobertNoyesEnvironment | string>;
+        environment?: core.Supplier<environments.PlantStoreEnvironment | string>;
         /** Specify a custom URL to connect the client to. */
         baseUrl?: core.Supplier<string>;
         /** Additional headers to include in requests. */
@@ -31,47 +31,44 @@ export declare namespace Plant {
     }
 }
 
-/**
- * Everything about your Plants
- */
-export class Plant {
-    protected readonly _options: Plant.Options;
+export class Plants {
+    protected readonly _options: Plants.Options;
 
-    constructor(_options: Plant.Options = {}) {
+    constructor(_options: Plants.Options = {}) {
         this._options = _options;
     }
 
     /**
-     * @param {RobertNoyes.Plant} request
-     * @param {Plant.RequestOptions} requestOptions - Request-specific configuration.
+     * @param {PlantStore.Plant} request
+     * @param {Plants.RequestOptions} requestOptions - Request-specific configuration.
      *
-     * @throws {@link RobertNoyes.MethodNotAllowedError}
+     * @throws {@link PlantStore.MethodNotAllowedError}
      *
      * @example
-     *     await client.plant.addPlant({
+     *     await client.plants.create({
      *         name: "Fern",
      *         category: "Indoor",
      *         tags: ["green", "leafy"],
      *         status: "available"
      *     })
      */
-    public addPlant(
-        request: RobertNoyes.Plant,
-        requestOptions?: Plant.RequestOptions,
-    ): core.HttpResponsePromise<RobertNoyes.PlantResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__addPlant(request, requestOptions));
+    public create(
+        request: PlantStore.Plant,
+        requestOptions?: Plants.RequestOptions,
+    ): core.HttpResponsePromise<PlantStore.PlantResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__create(request, requestOptions));
     }
 
-    private async __addPlant(
-        request: RobertNoyes.Plant,
-        requestOptions?: Plant.RequestOptions,
-    ): Promise<core.WithRawResponse<RobertNoyes.PlantResponse>> {
+    private async __create(
+        request: PlantStore.Plant,
+        requestOptions?: Plants.RequestOptions,
+    ): Promise<core.WithRawResponse<PlantStore.PlantResponse>> {
         let _headers: core.Fetcher.Args["headers"] = mergeHeaders(this._options?.headers, requestOptions?.headers);
         const _response = await core.fetcher({
             url: core.url.join(
                 (await core.Supplier.get(this._options.baseUrl)) ??
                     (await core.Supplier.get(this._options.environment)) ??
-                    environments.RobertNoyesEnvironment.Default,
+                    environments.PlantStoreEnvironment.Default,
                 "plant",
             ),
             method: "POST",
@@ -85,15 +82,15 @@ export class Plant {
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return { data: _response.body as RobertNoyes.PlantResponse, rawResponse: _response.rawResponse };
+            return { data: _response.body as PlantStore.PlantResponse, rawResponse: _response.rawResponse };
         }
 
         if (_response.error.reason === "status-code") {
             switch (_response.error.statusCode) {
                 case 405:
-                    throw new RobertNoyes.MethodNotAllowedError(_response.error.body as unknown, _response.rawResponse);
+                    throw new PlantStore.MethodNotAllowedError(_response.error.body as unknown, _response.rawResponse);
                 default:
-                    throw new errors.RobertNoyesError({
+                    throw new errors.PlantStoreError({
                         statusCode: _response.error.statusCode,
                         body: _response.error.body,
                         rawResponse: _response.rawResponse,
@@ -103,15 +100,15 @@ export class Plant {
 
         switch (_response.error.reason) {
             case "non-json":
-                throw new errors.RobertNoyesError({
+                throw new errors.PlantStoreError({
                     statusCode: _response.error.statusCode,
                     body: _response.error.rawBody,
                     rawResponse: _response.rawResponse,
                 });
             case "timeout":
-                throw new errors.RobertNoyesTimeoutError("Timeout exceeded when calling POST /plant.");
+                throw new errors.PlantStoreTimeoutError("Timeout exceeded when calling POST /plant.");
             case "unknown":
-                throw new errors.RobertNoyesError({
+                throw new errors.PlantStoreError({
                     message: _response.error.errorMessage,
                     rawResponse: _response.rawResponse,
                 });
@@ -119,37 +116,37 @@ export class Plant {
     }
 
     /**
-     * @param {RobertNoyes.Plant} request
-     * @param {Plant.RequestOptions} requestOptions - Request-specific configuration.
+     * @param {PlantStore.Plant} request
+     * @param {Plants.RequestOptions} requestOptions - Request-specific configuration.
      *
-     * @throws {@link RobertNoyes.BadRequestError}
-     * @throws {@link RobertNoyes.NotFoundError}
+     * @throws {@link PlantStore.BadRequestError}
+     * @throws {@link PlantStore.NotFoundError}
      *
      * @example
-     *     await client.plant.updatePlant({
+     *     await client.plants.update({
      *         name: "Fern",
      *         category: "Indoor",
      *         tags: ["green", "leafy"],
      *         status: "sold"
      *     })
      */
-    public updatePlant(
-        request: RobertNoyes.Plant,
-        requestOptions?: Plant.RequestOptions,
-    ): core.HttpResponsePromise<RobertNoyes.PlantResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__updatePlant(request, requestOptions));
+    public update(
+        request: PlantStore.Plant,
+        requestOptions?: Plants.RequestOptions,
+    ): core.HttpResponsePromise<PlantStore.PlantResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__update(request, requestOptions));
     }
 
-    private async __updatePlant(
-        request: RobertNoyes.Plant,
-        requestOptions?: Plant.RequestOptions,
-    ): Promise<core.WithRawResponse<RobertNoyes.PlantResponse>> {
+    private async __update(
+        request: PlantStore.Plant,
+        requestOptions?: Plants.RequestOptions,
+    ): Promise<core.WithRawResponse<PlantStore.PlantResponse>> {
         let _headers: core.Fetcher.Args["headers"] = mergeHeaders(this._options?.headers, requestOptions?.headers);
         const _response = await core.fetcher({
             url: core.url.join(
                 (await core.Supplier.get(this._options.baseUrl)) ??
                     (await core.Supplier.get(this._options.environment)) ??
-                    environments.RobertNoyesEnvironment.Default,
+                    environments.PlantStoreEnvironment.Default,
                 "plant",
             ),
             method: "PUT",
@@ -163,17 +160,17 @@ export class Plant {
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return { data: _response.body as RobertNoyes.PlantResponse, rawResponse: _response.rawResponse };
+            return { data: _response.body as PlantStore.PlantResponse, rawResponse: _response.rawResponse };
         }
 
         if (_response.error.reason === "status-code") {
             switch (_response.error.statusCode) {
                 case 400:
-                    throw new RobertNoyes.BadRequestError(_response.error.body as unknown, _response.rawResponse);
+                    throw new PlantStore.BadRequestError(_response.error.body as unknown, _response.rawResponse);
                 case 404:
-                    throw new RobertNoyes.NotFoundError(_response.error.body as unknown, _response.rawResponse);
+                    throw new PlantStore.NotFoundError(_response.error.body as unknown, _response.rawResponse);
                 default:
-                    throw new errors.RobertNoyesError({
+                    throw new errors.PlantStoreError({
                         statusCode: _response.error.statusCode,
                         body: _response.error.body,
                         rawResponse: _response.rawResponse,
@@ -183,15 +180,15 @@ export class Plant {
 
         switch (_response.error.reason) {
             case "non-json":
-                throw new errors.RobertNoyesError({
+                throw new errors.PlantStoreError({
                     statusCode: _response.error.statusCode,
                     body: _response.error.rawBody,
                     rawResponse: _response.rawResponse,
                 });
             case "timeout":
-                throw new errors.RobertNoyesTimeoutError("Timeout exceeded when calling PUT /plant.");
+                throw new errors.PlantStoreTimeoutError("Timeout exceeded when calling PUT /plant.");
             case "unknown":
-                throw new errors.RobertNoyesError({
+                throw new errors.PlantStoreError({
                     message: _response.error.errorMessage,
                     rawResponse: _response.rawResponse,
                 });
@@ -201,23 +198,23 @@ export class Plant {
     /**
      * Filter plants based on their current status.
      *
-     * @param {RobertNoyes.SearchPlantsByStatusRequest} request
-     * @param {Plant.RequestOptions} requestOptions - Request-specific configuration.
+     * @param {PlantStore.ListByStatusPlantsRequest} request
+     * @param {Plants.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @example
-     *     await client.plant.searchPlantsByStatus()
+     *     await client.plants.listByStatus()
      */
-    public searchPlantsByStatus(
-        request: RobertNoyes.SearchPlantsByStatusRequest = {},
-        requestOptions?: Plant.RequestOptions,
-    ): core.HttpResponsePromise<RobertNoyes.PlantResponse[]> {
-        return core.HttpResponsePromise.fromPromise(this.__searchPlantsByStatus(request, requestOptions));
+    public listByStatus(
+        request: PlantStore.ListByStatusPlantsRequest = {},
+        requestOptions?: Plants.RequestOptions,
+    ): core.HttpResponsePromise<PlantStore.PlantResponse[]> {
+        return core.HttpResponsePromise.fromPromise(this.__listByStatus(request, requestOptions));
     }
 
-    private async __searchPlantsByStatus(
-        request: RobertNoyes.SearchPlantsByStatusRequest = {},
-        requestOptions?: Plant.RequestOptions,
-    ): Promise<core.WithRawResponse<RobertNoyes.PlantResponse[]>> {
+    private async __listByStatus(
+        request: PlantStore.ListByStatusPlantsRequest = {},
+        requestOptions?: Plants.RequestOptions,
+    ): Promise<core.WithRawResponse<PlantStore.PlantResponse[]>> {
         const { status } = request;
         const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
         if (status != null) {
@@ -229,7 +226,7 @@ export class Plant {
             url: core.url.join(
                 (await core.Supplier.get(this._options.baseUrl)) ??
                     (await core.Supplier.get(this._options.environment)) ??
-                    environments.RobertNoyesEnvironment.Default,
+                    environments.PlantStoreEnvironment.Default,
                 "plant/search/status",
             ),
             method: "GET",
@@ -240,11 +237,11 @@ export class Plant {
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return { data: _response.body as RobertNoyes.PlantResponse[], rawResponse: _response.rawResponse };
+            return { data: _response.body as PlantStore.PlantResponse[], rawResponse: _response.rawResponse };
         }
 
         if (_response.error.reason === "status-code") {
-            throw new errors.RobertNoyesError({
+            throw new errors.PlantStoreError({
                 statusCode: _response.error.statusCode,
                 body: _response.error.body,
                 rawResponse: _response.rawResponse,
@@ -253,15 +250,15 @@ export class Plant {
 
         switch (_response.error.reason) {
             case "non-json":
-                throw new errors.RobertNoyesError({
+                throw new errors.PlantStoreError({
                     statusCode: _response.error.statusCode,
                     body: _response.error.rawBody,
                     rawResponse: _response.rawResponse,
                 });
             case "timeout":
-                throw new errors.RobertNoyesTimeoutError("Timeout exceeded when calling GET /plant/search/status.");
+                throw new errors.PlantStoreTimeoutError("Timeout exceeded when calling GET /plant/search/status.");
             case "unknown":
-                throw new errors.RobertNoyesError({
+                throw new errors.PlantStoreError({
                     message: _response.error.errorMessage,
                     rawResponse: _response.rawResponse,
                 });
@@ -271,23 +268,23 @@ export class Plant {
     /**
      * Filter plants based on associated tags.
      *
-     * @param {RobertNoyes.SearchPlantsByTagsRequest} request
-     * @param {Plant.RequestOptions} requestOptions - Request-specific configuration.
+     * @param {PlantStore.ListByTagsPlantsRequest} request
+     * @param {Plants.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @example
-     *     await client.plant.searchPlantsByTags()
+     *     await client.plants.listByTags()
      */
-    public searchPlantsByTags(
-        request: RobertNoyes.SearchPlantsByTagsRequest = {},
-        requestOptions?: Plant.RequestOptions,
-    ): core.HttpResponsePromise<RobertNoyes.PlantResponse[]> {
-        return core.HttpResponsePromise.fromPromise(this.__searchPlantsByTags(request, requestOptions));
+    public listByTags(
+        request: PlantStore.ListByTagsPlantsRequest = {},
+        requestOptions?: Plants.RequestOptions,
+    ): core.HttpResponsePromise<PlantStore.PlantResponse[]> {
+        return core.HttpResponsePromise.fromPromise(this.__listByTags(request, requestOptions));
     }
 
-    private async __searchPlantsByTags(
-        request: RobertNoyes.SearchPlantsByTagsRequest = {},
-        requestOptions?: Plant.RequestOptions,
-    ): Promise<core.WithRawResponse<RobertNoyes.PlantResponse[]>> {
+    private async __listByTags(
+        request: PlantStore.ListByTagsPlantsRequest = {},
+        requestOptions?: Plants.RequestOptions,
+    ): Promise<core.WithRawResponse<PlantStore.PlantResponse[]>> {
         const { tags } = request;
         const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
         if (tags != null) {
@@ -303,7 +300,7 @@ export class Plant {
             url: core.url.join(
                 (await core.Supplier.get(this._options.baseUrl)) ??
                     (await core.Supplier.get(this._options.environment)) ??
-                    environments.RobertNoyesEnvironment.Default,
+                    environments.PlantStoreEnvironment.Default,
                 "plant/search/tags",
             ),
             method: "GET",
@@ -314,11 +311,11 @@ export class Plant {
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return { data: _response.body as RobertNoyes.PlantResponse[], rawResponse: _response.rawResponse };
+            return { data: _response.body as PlantStore.PlantResponse[], rawResponse: _response.rawResponse };
         }
 
         if (_response.error.reason === "status-code") {
-            throw new errors.RobertNoyesError({
+            throw new errors.PlantStoreError({
                 statusCode: _response.error.statusCode,
                 body: _response.error.body,
                 rawResponse: _response.rawResponse,
@@ -327,15 +324,15 @@ export class Plant {
 
         switch (_response.error.reason) {
             case "non-json":
-                throw new errors.RobertNoyesError({
+                throw new errors.PlantStoreError({
                     statusCode: _response.error.statusCode,
                     body: _response.error.rawBody,
                     rawResponse: _response.rawResponse,
                 });
             case "timeout":
-                throw new errors.RobertNoyesTimeoutError("Timeout exceeded when calling GET /plant/search/tags.");
+                throw new errors.PlantStoreTimeoutError("Timeout exceeded when calling GET /plant/search/tags.");
             case "unknown":
-                throw new errors.RobertNoyesError({
+                throw new errors.PlantStoreError({
                     message: _response.error.errorMessage,
                     rawResponse: _response.rawResponse,
                 });
@@ -345,32 +342,32 @@ export class Plant {
     /**
      * Retrieve a plant's details by its ID.
      *
-     * @param {RobertNoyes.GetPlantByIdRequest} request
-     * @param {Plant.RequestOptions} requestOptions - Request-specific configuration.
+     * @param {PlantStore.GetPlantsRequest} request
+     * @param {Plants.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @example
-     *     await client.plant.getPlantById({
+     *     await client.plants.get({
      *         plantId: 1
      *     })
      */
-    public getPlantById(
-        request: RobertNoyes.GetPlantByIdRequest,
-        requestOptions?: Plant.RequestOptions,
-    ): core.HttpResponsePromise<RobertNoyes.PlantResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__getPlantById(request, requestOptions));
+    public get(
+        request: PlantStore.GetPlantsRequest,
+        requestOptions?: Plants.RequestOptions,
+    ): core.HttpResponsePromise<PlantStore.PlantResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__get(request, requestOptions));
     }
 
-    private async __getPlantById(
-        request: RobertNoyes.GetPlantByIdRequest,
-        requestOptions?: Plant.RequestOptions,
-    ): Promise<core.WithRawResponse<RobertNoyes.PlantResponse>> {
+    private async __get(
+        request: PlantStore.GetPlantsRequest,
+        requestOptions?: Plants.RequestOptions,
+    ): Promise<core.WithRawResponse<PlantStore.PlantResponse>> {
         const { plantId } = request;
         let _headers: core.Fetcher.Args["headers"] = mergeHeaders(this._options?.headers, requestOptions?.headers);
         const _response = await core.fetcher({
             url: core.url.join(
                 (await core.Supplier.get(this._options.baseUrl)) ??
                     (await core.Supplier.get(this._options.environment)) ??
-                    environments.RobertNoyesEnvironment.Default,
+                    environments.PlantStoreEnvironment.Default,
                 `plant/${encodeURIComponent(plantId)}`,
             ),
             method: "GET",
@@ -381,11 +378,11 @@ export class Plant {
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return { data: _response.body as RobertNoyes.PlantResponse, rawResponse: _response.rawResponse };
+            return { data: _response.body as PlantStore.PlantResponse, rawResponse: _response.rawResponse };
         }
 
         if (_response.error.reason === "status-code") {
-            throw new errors.RobertNoyesError({
+            throw new errors.PlantStoreError({
                 statusCode: _response.error.statusCode,
                 body: _response.error.body,
                 rawResponse: _response.rawResponse,
@@ -394,15 +391,15 @@ export class Plant {
 
         switch (_response.error.reason) {
             case "non-json":
-                throw new errors.RobertNoyesError({
+                throw new errors.PlantStoreError({
                     statusCode: _response.error.statusCode,
                     body: _response.error.rawBody,
                     rawResponse: _response.rawResponse,
                 });
             case "timeout":
-                throw new errors.RobertNoyesTimeoutError("Timeout exceeded when calling GET /plant/{plantId}.");
+                throw new errors.PlantStoreTimeoutError("Timeout exceeded when calling GET /plant/{plantId}.");
             case "unknown":
-                throw new errors.RobertNoyesError({
+                throw new errors.PlantStoreError({
                     message: _response.error.errorMessage,
                     rawResponse: _response.rawResponse,
                 });
