@@ -1,14 +1,17 @@
-# RobertNoyesDemo TypeScript Library
+# Plant Store TypeScript Library
 
 [![fern shield](https://img.shields.io/badge/%F0%9F%8C%BF-Built%20with%20Fern-brightgreen)](https://buildwithfern.com?utm_source=github&utm_medium=github&utm_campaign=readme&utm_source=https%3A%2F%2Fgithub.com%2Frob-noyes%2Fplantstore-typescript-sdk)
 [![npm shield](https://img.shields.io/npm/v/plantstore-typescript-sdk)](https://www.npmjs.com/package/plantstore-typescript-sdk)
 
-The RobertNoyesDemo TypeScript library provides convenient access to the RobertNoyesDemo APIs from TypeScript.
+TypeScript SDK for the Plant Store API.
+This SDK is generated with Fern and provides typed methods for working with plants and users.
 
 ## Table of Contents
 
+- [Documentation](#documentation)
 - [Installation](#installation)
 - [Reference](#reference)
+- [Configuration Repo](#configuration-repo)
 - [Usage](#usage)
 - [Request and Response Types](#request-and-response-types)
 - [Exception Handling](#exception-handling)
@@ -22,6 +25,10 @@ The RobertNoyesDemo TypeScript library provides convenient access to the RobertN
     - [Runtime Compatibility](#runtime-compatibility)
 - [Contributing](#contributing)
 
+## Documentation
+
+API reference documentation is available [here](https://buildwithfern.com).
+
 ## Installation
 
 ```sh
@@ -31,6 +38,13 @@ npm i -s plantstore-typescript-sdk
 ## Reference
 
 A full reference for this library is available [here](https://github.com/rob-noyes/plantstore-typescript-sdk/blob/HEAD/./reference.md).
+
+## Configuration repo
+
+The Fern configuration and OpenAPI spec used to generate this SDK live here:
+https://github.com/rob-noyes/plantstore-fern-config
+
+Package: `plantstore-typescript-sdk`
 
 ## Usage
 
